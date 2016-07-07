@@ -24,7 +24,7 @@
     "eventemitter2": "0.4.x",
     "optimist": "0.2.x",
     "underscore": "1.4.x",
-    "nssocket": "git://github.com/jaunis/nssocket.git",
+    "nssocket": "https://github.com/jaunis/nssocket.git",
     "async":"0.2.x",
     "tinyforever":">=0.0.3"
   },
