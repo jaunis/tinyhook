@@ -184,8 +184,6 @@ Hook.prototype.connect = function(options, cb) {
   
   client.on('close', function() {
     self.ready = false;
-    client.destroy();
-    client = self._client = null;
   })
   
   // tranlate pushed emit to local one
@@ -251,7 +249,7 @@ Hook.prototype.stop = function(cb) {
 // hook into core events to dispatch events as required
 Hook.prototype.emit = function(event, data, callback) {
   // on client send event to master
-  if (this._client) {
+  if (this._client && this.ready) {
     this._client.send(['tinyhook', 'emit'], {eid: this._uid++, event: event, data: data}, function () {});
   }
   // send to clients event emitted on server (master)
@@ -266,7 +264,7 @@ Hook.prototype.emit = function(event, data, callback) {
 };
 
 Hook.prototype.on = function(type, listener) {
-  if (this._client) {
+  if (this._client && this.ready) {
     this._client.send(['tinyhook', 'on'], {type: type}, function () {});
   }
   if (this._eventTypes) {
