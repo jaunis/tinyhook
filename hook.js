@@ -162,7 +162,7 @@ Hook.prototype.connect = function(options, cb) {
   // since we using reconnect, will callback rightaway
   cb();
   
-  var client = this._client = new nssocket.NsSocket({reconnect: options.reconnect});
+  var client = this._client = new nssocket.NsSocket(options);
   client.connect(self['hook-port'], self['hook-host']);
   
   // when connection started we sayng hello and push
